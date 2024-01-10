@@ -115,3 +115,17 @@ import reactImg from './assets'
 
 <img src={reactImg} alt="Stylized atom" />
 ```
+---
+### Making Components Reusable with Props
+
+##### Concept of props
+- being able to pass data into components and to then use that data in there
+- concept of being able to configure components
+
+```
+<CoreConcept title="Components" description="" />
+```
+- here 'title' and 'description' is called 'prop'
+- React component functions accept only ONE parameter. Usually named 'props'
+
+
