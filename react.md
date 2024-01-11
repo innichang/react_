@@ -128,4 +128,72 @@ import reactImg from './assets'
 - here 'title' and 'description' is called 'prop'
 - React component functions accept only ONE parameter. Usually named 'props'
 
+#### Review
+##### Which values can be output as dynamic values in JSX (i.e., between curly braces)? <br>
+    - Any valid Javascript expression.
+
+##### How can you assign a dynamic value to an HTML element attribute? <br>
+    - Via the same syntax you use for dynamic values in JSX in general: Curly braces
+
+---
+
+### Best Practice: Storing Components in Files & Using a Good Project Structure
+
+#### Components
+- It's not recommended to have all the components in the same file, because longer the code gets, it's harder to keep track of all the components in one file.
+- So it's good to make everything into component files
+
+#### CSS
+- CSS can be split into component-specific files
+- but without special configuration, the CSS files are not scoped to the specific component, so it can be used anywhere else.
+
+---
+
+### Component Composition: The special "children" Prop [Core Concept]
+
+```
+<TabButton>Content</TabButton>
+```
+- if something is passed is between the opening and closing component tags, the content inside is by default not output because React doesn't know where to output it without any specification.
+
+#### Use of 'children' prop
+- set by React 
+- simply refers to the text between component text
+- can be as simple as a text, or some complex JSX structure if needed
+
+##### Component Composition
+- When your component wraps other Components or other content, it is component composition
+
+#### Component Composition vs Using Attributes
+
+##### 1. Component Composition(using default children prop)
+```
+//App Component
+<TabButton>Component</TabButton>
+
+//TabButton Component
+function TabButton({children}) {
+    return <button>{children}</button>;
+}
+```
+- for components that take a single piece of renderable content.
+- closer to 'normal HTML usage'
+- convenient when passing JSX code as a value to another component
+
+##### 2. Using Attributes
+```
+//App Component
+<TabButton label="Component" />
+
+//TabButton Component
+function TabButton({label}) {
+    return <button>{label}</button>;
+}
+```
+- for situations where you have multiple smaller pieces of information that must be passed to a component
+- adding extra props instead of just wrapping content with the component tags mean extra work
+
+
+
+
 
