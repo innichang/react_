@@ -193,7 +193,28 @@ function TabButton({label}) {
 - for situations where you have multiple smaller pieces of information that must be passed to a component
 - adding extra props instead of just wrapping content with the component tags mean extra work
 
+---
 
+### Reacting to Events
+- in vanilla JS, you interact with the DOM, add even listeners to make buttons reactive
+- in React, special attribute are added to the elements, and they are called props(because in the end the build-in elements are just another component)
+- onClick prop 
+
+```
+export default function TabButton({ children }) {
+  function handleClick () {
+    console.log("Hello World!");
+  }
+
+  return (
+    <li>
+      <button onClick={handleClick}>{children}</button>
+    </li>
+  );
+}
+```
+- The advantage of defining these event handler functions inside the component function is that they have access to the component's props and state.
+- you don't want to write onClick={handleClick()} because you don't want the function to execute when the page loads, but executed when the button is clicked. You want to use the function as a value.
 
 
 
