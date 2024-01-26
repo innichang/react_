@@ -9,17 +9,14 @@
 #### Why Components?
 
 ##### 1. Reusable Building Blocks
-
     - create small building blocks & compose the UI from them
     - reuse a building block in different parts of the code
 
 ##### 2. Related Code Lives Together
-
     - related HTML, JS and possibly CSS files are stored together
     - since JS influences the output, storing HTML & JS together makes sense
 
 ##### 3. Separation of Concerns
-
     - different components handle differet data & logkc
     - simplifies the process of working on complex apps
 
@@ -80,7 +77,7 @@ Tree of components is just analyzed by React, and React then combines all the JS
 
 ### Dynamic values in React
 
-```
+```JS
 const reactDescriptions = ["Fundamental", "Crucial", "Core"];
 
 function genRandomInt(max) {
@@ -103,14 +100,14 @@ function Header() {
 - Only expressions that directly produces a value
 
 ### Dynamically rendering images
-```
+```JS
 <img src="src/assets/react-core-concepts.png" alt="Stylized atom" />
 ```
 - src attribute value is not the best way of loading images
 - image might get lost or ignored during deployment from whats called a **bundling process**
 
 ##### Use import statements
-```
+```JS
 import reactImg from './assets'
 
 <img src={reactImg} alt="Stylized atom" />
@@ -122,7 +119,7 @@ import reactImg from './assets'
 - being able to pass data into components and to then use that data in there
 - concept of being able to configure components
 
-```
+```JS
 <CoreConcept title="Components" description="" />
 ```
 - here 'title' and 'description' is called 'prop'
@@ -167,7 +164,7 @@ import reactImg from './assets'
 #### Component Composition vs Using Attributes
 
 ##### 1. Component Composition(using default children prop)
-```
+```JS
 //App Component
 <TabButton>Component</TabButton>
 
@@ -181,7 +178,7 @@ function TabButton({children}) {
 - convenient when passing JSX code as a value to another component
 
 ##### 2. Using Attributes
-```
+```JS
 //App Component
 <TabButton label="Component" />
 
@@ -200,7 +197,7 @@ function TabButton({label}) {
 - in React, special attribute are added to the elements, and they are called props(because in the end the build-in elements are just another component)
 - onClick prop 
 
-```
+```JS
 export default function TabButton({ children }) {
   function handleClick () {
     console.log("Hello World!");
@@ -217,4 +214,74 @@ export default function TabButton({ children }) {
 - you don't want to write onClick={handleClick()} because you don't want the function to execute when the page loads, but executed when the button is clicked. You want to use the function as a value.
 
 
+### Passing Custom Arguments to Event Functions
 
+```JSX
+<TabButton onSelect={handleSelect}>Components</TabButton>
+```
+
+Instead of passing in a raw function as above,
+we can pass an arrow function like below
+
+```JSX
+<TabButton onSelect={() => handleSelect('components')}>Components</TabButton>
+```
+
+#### Review
+##### What's the purpose of the special "children" prop? <br>
+ - You can use it to pass and use content between your component's opening & closing tags.
+<br>
+
+### How NOT to Update the UI - A Look Behind The Scenes of React
+- By default, React components execute **ONLY ONCE**.
+- You have to "tell" React if a component should be executed again
+
+#### How React Checks If UI Updates are needed
+- 
+
+### Managing States & Using Hooks
+#### State
+- registering variables that are handled by react and that are updated by the help of a function provided by react, that will also tell React that data changed and that will therefore cause React to update the UI
+
+```JS
+import { useState } from 'react';
+```
+
+- all functions that start with 'use' provided by React are hooks
+- only be called in React component functions or other react hooks
+- must call hook functions directly inside component function NOT nested inside of other code
+- must call on the top level of the component function
+
+#### 2 Important RULES of Hooks
+1. Only call Hooks inside of Component Functions
+  - React Hooks must not be called outside of React component functions
+2. Only call Hooks on the top level
+  - React Hooks must not be called in nested code statements(e.g., inside of if-statements)
+
+#### useState
+- manage component specific state(data stored by React, which when changed will trigger the component function to which the hook belongs to be re-executed/re-evaluated)
+- does accept argument (default value you want React to store)
+- can be stored in a variable
+- will return an array which includes exactly 2 elements
+- manage data & "tell" React to re-execute a component function via react's useState() Hook
+
+State updates lead to new state value(as the component function executes again)
+
+```JS
+const [ counter, setCounter ] = useState(0);
+```
+
+###### counter
+- current state value. provided by React. 
+- May change if the component function is executed again
+###### setCounter
+- State updating function
+- updates the stored value & "tells" React to re-execute the component function in which useState() was called
+- a function provided by React that can be executed to update this state
+###### 0
+- initial state value stored by React
+<br>
+
+
+
+# MORE NOTE DONE ON OBSIDIAN
