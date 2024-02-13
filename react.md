@@ -282,6 +282,79 @@ const [ counter, setCounter ] = useState(0);
 - initial state value stored by React
 <br>
 
+When calling setCounter,  will tell React that the component function here must be executed again
 
+'const' can be used for useState because it will be recreated everytime component is executed
 
-# MORE NOTE DONE ON OBSIDIAN
+Behind the scenes, React will store and update the actual value which will then be passed on to the constant when the component function executes again
+
+```JS
+const [ selectedTopic, setSelectedTopic] = useState("Please click a button");
+
+function handleSelect(selectedButton) {
+
+	setSelectedTopic(selectedButton);
+	
+	console.log(selectedTopic);
+
+}
+```
+When in the browser updating the component with **setSelectedTopic**, the console log prints the previous selectedTopic, not the selectedTopic updated by setSelectedTopic.
+
+when `setSelectedTopic(selectedButton)` is called, React in the end schedules the state update and it then re-executes the component function.
+
+Therefore, the updated value will only be available after the component function is executed
+
+SO, the log after the scheduled update doesn't immediately print the new value.
+
+It gets stored AFTER the component reload. 
+
+### CSS Styling & Dynamic Styling
+
+- use 'className' instead of 'class' in JSX files
+
+### Outputting List Data Dynamically
+
+```JS
+{CORE_CONCEPTS.map((conceptItem) => <CoreConcept key={conceptItem.title} {...conceptItem}/>)}
+
+{/* <CoreConcept {...CORE_CONCEPTS[0]} />
+
+<CoreConcept {...CORE_CONCEPTS[1]} />
+
+<CoreConcept {...CORE_CONCEPTS[2]} />
+
+<CoreConcept {...CORE_CONCEPTS[3]} /> */}
+```
+
+instead of using the bracket notation for each elements in the array, you can use the map method and display data dynamically
+
+#### WHY use a key prop?
+- to tell each data apart using a unique key
+
+### What I learned
+- Component
+- JSX
+- Props
+- State
+- create and use components -> simply a function
+ - must start with uppercase character
+ - must have a return value that can be rendered by React (JSX code)
+ - can use component functions as if they were custom HTML elements inside of JSX code
+ - configure components with props
+ - spread an entire object as key value pairs
+
+- study more about object destructuring in props
+- AND
+- props dot notation destructuring in components
+
+- output dynamic content with curly braces
+- output between tags as attribute values
+
+**special children prop**
+
+- listen to events using special 'on' props
+
+- to update the UI, you must use useState (hook)
+
+- manage and update data, which when updated will cause the component function to which the state belongs to execute again so that the JSX code is also reevaluated
