@@ -116,3 +116,97 @@ export default function TabButton({ children, isSelected, ...props }) {
 Using multiple sibling elements together as a value is NOT Allowed.
 
 If using JSX code as a value in some place, no matter if that place is the value being returned in a component or a value being stored in a variable, you have to make sure that there's only one root element in that place.
+
+
+```JSX
+return (
+    <Section title="Examples" id="examples">
+      <Tabs
+        buttonsContainer="menu"
+        buttons={
+          <>
+            <TabButton
+              isSelected={selectedTopic === "components"}
+              onClick={() => handleSelect("components")}
+            >
+              Components
+            </TabButton>
+            <TabButton
+              isSelected={selectedTopic === "jsx"}
+              onClick={() => handleSelect("jsx")}
+            >
+              JSX
+            </TabButton>
+            <TabButton
+              isSelected={selectedTopic === "props"}
+              onClick={() => handleSelect("props")}
+            >
+              Props
+            </TabButton>
+            <TabButton
+              isSelected={selectedTopic === "state"}
+              onClick={() => handleSelect("state")}
+            >
+              State
+            </TabButton>
+          </>
+        }
+      >
+        {tabContent}
+      </Tabs>
+    </Section>
+  );
+```
+<br>
+As the code above, we can instead put a parent component of our choice e.g. "div", "menu" etc, so that we can return multiple components at the same time.
+In the example above, a fragment is used '<>' to indicate that we are not setting an explicit component.
+<br>
+When passing in the prop buttonsContainer, if you want to use a built-in-html component you must set it as String.
+
+```JSX
+buttonsContainer="menu";
+buttonsContainer="div";
+```
+<br>
+However, if you want to set it as a custom component,
+you have to contain it inside curly brackets and JUST use the component name.
+
+```JSX
+buttonsContainer={Section};
+buttonsContainer={CoreConcepts};
+```
+
+<br>
+
+```JSX
+export default function Tabs({ children, buttons, buttonsContainer }) {
+  const ButtonsContainer = buttonsContainer;
+
+  return (
+    <>
+      <ButtonsContainer>{ buttons }</ButtonsContainer>
+      { children }
+    </>
+  );
+}
+```
+The Tabs Component receives the buttons and renders it to the screen. If we directly use the buttonsContainer value in the <>, it would be
+```JSX
+<buttonsContainer></buttonsContainer>
+```
+The problem with this is that react would look for built-in-component called 'buttonsContainer' but no such built-in-component exists. 
+So we have the define the buttonsContainer value and store it in a different value, but this value MUST be capital letter first
+```JSX
+const ButtonsContainer = buttonsContainer;
+return (
+  <ButtonsContainer></ButtonsContainer>
+)
+```
+<br>
+
+### Setting Default Prop Values
+
+```JSX
+export default function Tabs({ children, buttons, ButtonsContainer = "menu" }) {
+```
+This would set the default value of ButtonsContainer to "menu"
