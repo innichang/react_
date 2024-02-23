@@ -22,4 +22,8 @@ function handleEditClick() {
 
   Above is 'passing a function' example.
 
-  This function will automatically be called by React and will receive the guaranteed latest state value
+
+##### Why should a function be passed?
+
+  This function will automatically be called by React and will **receive the guaranteed** latest state value
+
