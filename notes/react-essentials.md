@@ -267,7 +267,7 @@ import { useState } from 'react';
 
 State updates lead to new state value(as the component function executes again)
 
-```JS
+
 const [ counter, setCounter ] = useState(0);
 ```
 
