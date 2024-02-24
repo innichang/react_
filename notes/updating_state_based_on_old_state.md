@@ -42,11 +42,16 @@ function handleEditClick() {
 
 ```JSX
   setIsEditing(!isEditing) //isEditing value would become 'false'
-  setIsEditing(!isEditing) /*since isEditing value became 'false' in the previous function, now it 
+  setIsEditing(!isEditing) /*since isEditing value became 'false' 
+                            in the previous function, now it 
                             will become 'true'*/
 ```
+-----
 
   However due to a special characteristic of React, that is not the case.
+
+  with both `setIsEditing` function inside `handleEditClick` function, React is scheduling the state updates, and both are based on the current value of `isEditing`.
+  so both `setIsEditing` takes the same `isEditing` value.
 
   Behind the scenes, React is basically `scheduling` those state update functions, 
   meaning the state update functions are not performed instantly.
@@ -55,3 +60,12 @@ function handleEditClick() {
   Then what happens is that when the component is rendered the initial state values are passed into the state updating function and is 'scheduled' for it to be used by the user.
 
   which means, if the initial value of `isEditing` is `true`, however many `setIsEditing` function is called, the output will always be `false`.
+
+-----
+
+To prevent such problem, we use the function for updating the state instead.
+```JSX
+  setIsEditing(editing => !editing);
+```
+If updating the state based on a previous state value, function form should be used.
+  
