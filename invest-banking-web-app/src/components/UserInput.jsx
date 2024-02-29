@@ -1,4 +1,4 @@
-export default function UserInput() {
+export default function UserInput({ onChangeValues }) {
   return (
     <section id="user-input">
       <div className="input-group">
